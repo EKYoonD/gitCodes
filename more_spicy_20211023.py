@@ -6,6 +6,7 @@ K = 7
 
 # heapq 안쓰면 효율성 검사 통과 못함
 def solution_no_heap(scoville, K):
+    scoville = sorted(scoville)
     count_scoville = 0
     while True:
         for scov in scoville:
@@ -27,14 +28,15 @@ def solution_no_heap(scoville, K):
 # heapq 사용
 def solution_heap(scoville, k):
     heapq.heapify(scoville)
-    i = 0
+    count = 0
     while scoville[0] < k:
-        if len(scoville) > 1:
-            heapq.heappush(scoville, heapq.heappop(scoville) + (heapq.heappop(scoville) * 2))
-            i += 1
+        if len(scoville) > 1 :
+            heapq.heappush(scoville, heapq.heappop(scoville) + heapq.heappop(scoville)*2)
+            count += 1
         else:
             return -1
-    return i
+    return count
 
 
 print(solution_no_heap(scoville, K))
+print(solution_heap(scoville, K))
